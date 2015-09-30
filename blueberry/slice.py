@@ -1,8 +1,8 @@
 import bluetooth as bt
-import time
 from threading import Event, Thread
 
 from constants import UUID
+from sensor import Sensor
 
 
 INTERVAL = 1
@@ -12,11 +12,12 @@ class Slice(Thread):
     def __init__(self):
         Thread.__init__(self)
         self.done = None
+        self.sensor = Sensor()
 
     def run(self):
         self.done = Event()
         while not self.done.wait(INTERVAL):
-            info = time.time()
+            info = self.sensor.read()
             # self.send(info)
             print info
 
