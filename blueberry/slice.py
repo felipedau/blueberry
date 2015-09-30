@@ -9,15 +9,16 @@ INTERVAL = 1
 
 
 class Slice(Thread):
-    def __init__(self, local=False):
+    def __init__(self, local=False, interval=INTERVAL):
         Thread.__init__(self)
         self.done = None
+        self.interval = interval
         self.local = local
         self.sensor = Sensor()
 
     def run(self):
         self.done = Event()
-        while not self.done.wait(INTERVAL):
+        while not self.done.wait(self.interval):
             info = self.sensor.read()
             if self.local:
                 print info
