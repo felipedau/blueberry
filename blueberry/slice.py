@@ -9,17 +9,20 @@ INTERVAL = 1
 
 
 class Slice(Thread):
-    def __init__(self):
+    def __init__(self, local=False):
         Thread.__init__(self)
         self.done = None
+        self.local = local
         self.sensor = Sensor()
 
     def run(self):
         self.done = Event()
         while not self.done.wait(INTERVAL):
             info = self.sensor.read()
-            # self.send(info)
-            print info
+            if self.local:
+                print info
+            else:
+                self.send(info)
 
     def send(self, info):
         # search for the server service
