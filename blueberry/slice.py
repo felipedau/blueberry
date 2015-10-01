@@ -44,7 +44,7 @@ class Slice(Thread):
         sock.connect((host, port))
         print('Connected')
 
-        sock.send(info)
+        sock.send(str(info))
         print('Info sent')
 
         sock.close()
