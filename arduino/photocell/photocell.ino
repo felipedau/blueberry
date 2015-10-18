@@ -1,45 +1,43 @@
-//Pino analógico em que o sensor está conectado.
-int Pino = 0;
-//Variavel de leitura
-int ValorSensor = 0;
+// pino analogico em que o sensor esta conectado
+int sensor = 0;
 
-//Método setup, executado uma vez ao ligar o Arduino.
-void setup(){
-//ativando o serial monitor
-Serial.begin(9600);
+// pinos digitais indicadores de nivel
+int ledVermelho = 8;
+int ledAmarelo = 10;
+int ledVerde = 12;
+
+int luminosidade = 0;
+
+int intervalo = 5000;
+
+// metodo setup, executado uma vez ao ligar o arduino
+void setup() {
+	//ativando o serial monitor
+	Serial.begin(9600);
 }
 
-//metodo loop, executado enquanto o arduino estiver ligado
-void loop(){
+// metodo loop, executado enquanto o arduino estiver ligado
+void loop() {
+	luminosidade = analogRead(sensor);
 
-ValorSensor = analogRead(Pino);
+	apagaLeds();
+	if (luminosidade < 300) {
+		// luminosidade baixa
+		digitalWrite(ledVermelho, HIGH);
+	} else if (luminosidade < 600) {
+		// luminosidade media
+		digitalWrite(ledAmarelo, HIGH);
+	} else {
+		// luminosidade alta
+		digitalWrite(ledVerde, HIGH);
+	}
 
-//Luminosidade baixa.
-  if (valorSensor < 750) {
-    apagaLeds();
-    digitalWrite(ledVermelho,HIGH);
-  }
-  
-  //Luminosidade média.
-  if (valorSensor >= 750 && valorSensor <= 800) {
-    apagaLeds();
-    digitalWrite(ledAmarelo,HIGH);
-  }
-  
-  //Luminosidade alta.
-  if (valorSensor > 800) {
-    apagaLeds();
-    digitalWrite(ledVerde,HIGH);
-  }
-  
-  Serial.println(ValorSensor);
-  delay(2000);
-
-
+	Serial.println(luminosidade);
+	delay(intervalo);
 }
 
 void apagaLeds() {
-  digitalWrite(ledVerde,LOW);
-  digitalWrite(ledAmarelo,LOW);
-  digitalWrite(ledVermelho,LOW);
-}  
+	digitalWrite(ledVermelho, LOW);
+	digitalWrite(ledAmarelo, LOW);
+	digitalWrite(ledVerde, LOW);
+}
