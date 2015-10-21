@@ -3,9 +3,9 @@
 # desc: simple demonstration of a server application that uses RFCOMM sockets
 #
 # $Id: rfcomm-server.py 518 2007-08-10 07:20:07Z albert $
-from threading import Thread
-
 from bluetooth import *
+
+from receiver import Receiver
 
 
 class Pi:
@@ -31,9 +31,9 @@ class Pi:
         while self.accept:
             print("Esperando clientes")
             client_sock, client_info = self.server_sock.accept()
-            t = Thread(target=self.receive, args=(client_sock,client_info,))
-            t.daemon= True
-            t.start()
+            r = Receiver(self, client_sock, client_info)
+            r.daemon = True
+            r.start()
             self.cont+=1
             print("clientes conectados "+str(self.cont))
 
@@ -42,25 +42,6 @@ class Pi:
 
     def stop(self):
         self.accept = False
-
-
-    def receive(self, client_sock, client_info):
-
-        print("Accepted connection from ", client_info)
-
-        try:
-            while True:
-                data = client_sock.recv(1024)
-                if len(data) == 0: break
-                print("received [%s]" % data)
-        except IOError:
-            pass
-
-        print("disconnected")
-
-        client_sock.close()
-
-        print("client done")
 
 
 if __name__ == '__main__':
