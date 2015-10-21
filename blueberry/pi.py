@@ -3,6 +3,8 @@
 # desc: simple demonstration of a server application that uses RFCOMM sockets
 #
 # $Id: rfcomm-server.py 518 2007-08-10 07:20:07Z albert $
+from threading import Lock
+
 from bluetooth import *
 
 from receiver import Receiver
@@ -10,6 +12,9 @@ from receiver import Receiver
 
 class Pi:
     def __init__(self):
+        self._devices = {}
+        self._lock_devices = Lock()
+
         self.server_sock=BluetoothSocket( RFCOMM )
         self.server_sock.bind(("",PORT_ANY))
         self.server_sock.listen(1)
@@ -42,6 +47,11 @@ class Pi:
 
     def stop(self):
         self.accept = False
+
+    def update_device(self, device, data):
+        self._lock_devices.acquire()
+        self._devices[device] = data
+        self._lock_devices.release()
 
 
 if __name__ == '__main__':

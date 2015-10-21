@@ -17,6 +17,7 @@ class Receiver(Thread):
                 if len(data) == 0:
                     break
                 print("received: %s" % data)
+                self.pi.update_device(self.client_info[0], data)
         except IOError:
             pass
 
