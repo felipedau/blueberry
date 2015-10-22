@@ -1,4 +1,3 @@
-from threading import Thread
 import Tkinter as Tk
 import operator
 
@@ -26,9 +25,7 @@ class ServerGui(Tk.Tk, object):
         self.pi = Pi()
         self.pi.start()
 
-        t = Thread(target=self.keep_updating)
-        t.daemon = True
-        t.start()
+        self.after(1000, self.keep_updating)
 
     def update_list(self):
         counter = sorted(self.pi.devices.items(), key=operator.itemgetter(0))
@@ -40,8 +37,8 @@ class ServerGui(Tk.Tk, object):
             self.list.insert(Tk.END, 'Nenhum dispositivo ativo')
 
     def keep_updating(self):
-        while True:
-            self.after(1000, self.update_list)
+        self.update_list()
+        self.after(1000, self.keep_updating)
 
 
 if __name__ == '__main__':
