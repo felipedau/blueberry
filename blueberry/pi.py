@@ -3,6 +3,7 @@
 # desc: simple demonstration of a server application that uses RFCOMM sockets
 #
 # $Id: rfcomm-server.py 518 2007-08-10 07:20:07Z albert $
+from copy import deepcopy
 from threading import Lock
 
 from bluetooth import *
@@ -31,6 +32,13 @@ class Pi:
         #                   protocols = [ OBEX_UUID ]
                             )
         print("Waiting for connection on RFCOMM channel %d" % port)
+
+    @property
+    def devices(self):
+        self._lock_devices.acquire()
+        devs = deepcopy(self._devices)
+        self._lock_devices.release()
+        return devs
 
     def run(self):
         while self.accept:
