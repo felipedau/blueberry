@@ -4,15 +4,17 @@
 #
 # $Id: rfcomm-server.py 518 2007-08-10 07:20:07Z albert $
 from copy import deepcopy
-from threading import Lock
+from threading import Lock, Thread
 
 from bluetooth import *
 
 from receiver import Receiver
 
 
-class Pi:
+class Pi(Thread):
     def __init__(self):
+        Thread.__init__(self)
+
         self._devices = {}
         self._lock_devices = Lock()
 
@@ -63,6 +65,5 @@ class Pi:
 
 
 if __name__ == '__main__':
-
     p = Pi()
-    p.run()
+    p.start()
