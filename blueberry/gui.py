@@ -41,5 +41,9 @@ class ServerGui(Tk.Tk, object):
         self.after(1000, self.keep_updating)
 
 
-if __name__ == '__main__':
+def main():
     ServerGui().mainloop()
+
+
+if __name__ == '__main__':
+    main()

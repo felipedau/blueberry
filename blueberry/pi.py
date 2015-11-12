@@ -64,6 +64,16 @@ class Pi(Thread):
         self._lock_devices.release()
 
 
-if __name__ == '__main__':
+def main():
     p = Pi()
     p.start()
+    try:
+        raw_input('Press any key to stop the server')
+    except KeyboardInterrupt:
+        pass
+    finally:
+        p.stop()
+
+
+if __name__ == '__main__':
+    main()

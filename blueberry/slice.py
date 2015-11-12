@@ -52,3 +52,18 @@ class Slice(Thread):
 
     def stop(self):
         self.done.set()
+
+
+def main():
+    s = Slice()
+    s.start()
+    try:
+        raw_input('Press any key to stop the client')
+    except KeyboardInterrupt:
+        print()
+    finally:
+        s.stop()
+
+
+if __name__ == '__main__':
+    main()
