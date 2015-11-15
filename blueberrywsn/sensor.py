@@ -7,7 +7,14 @@ RATE = 9600
 
 class Sensor:
     def __init__(self, port=PORT, rate=RATE):
-        self.serial = Serial(port, rate)
+        self.serial = None
+        try:
+            self.serial = Serial(port, rate)
+        except OSError:
+            print('No sensor reader found at %s' % port)
 
     def read(self):
-        return self.serial.readline().strip()
+        try:
+            return self.serial.readline().strip()
+        except AttributeError:
+            return None

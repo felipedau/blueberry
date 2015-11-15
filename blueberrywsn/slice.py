@@ -20,10 +20,13 @@ class Slice(Thread):
         self.done = Event()
         while not self.done.wait(self.interval):
             info = self.sensor.read()
-            if self.local:
-                print info
+            if info:
+                if self.local:
+                    print info
+                else:
+                    self.send(info)
             else:
-                self.send(info)
+                print('The sensor could not be read')
 
     def send(self, info):
         # search for the server service
