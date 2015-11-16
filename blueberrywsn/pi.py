@@ -50,7 +50,7 @@ class Pi(Thread):
             self.cont += 1
             print("clientes conectados " + str(self.cont))
 
-        server_sock.close()
+        self.server_sock.close()
         print("server done")
 
     def stop(self):
