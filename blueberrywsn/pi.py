@@ -6,7 +6,7 @@
 from copy import deepcopy
 from threading import Lock, Thread
 
-from bluetooth import *
+import bluetooth as bt
 
 from constants import UUID
 from receiver import Receiver
@@ -19,17 +19,17 @@ class Pi(Thread):
         self._devices = {}
         self._lock_devices = Lock()
 
-        self.server_sock = BluetoothSocket(RFCOMM)
-        self.server_sock.bind(("", PORT_ANY))
+        self.server_sock = bt.BluetoothSocket(bt.RFCOMM)
+        self.server_sock.bind(("", bt.PORT_ANY))
         self.server_sock.listen(1)
         self.accept = True
         self.cont = 0
         port = self.server_sock.getsockname()[1]
 
-        advertise_service(self.server_sock, "SampleServer",
-                          service_id=UUID,
-                          service_classes=[UUID, SERIAL_PORT_CLASS],
-                          profiles=[SERIAL_PORT_PROFILE])
+        bt.advertise_service(self.server_sock, "SampleServer",
+                             service_id=UUID,
+                             service_classes=[UUID, bt.SERIAL_PORT_CLASS],
+                             profiles=[bt.SERIAL_PORT_PROFILE])
 
         print("Waiting for connection on RFCOMM channel %d" % port)
 
