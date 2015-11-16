@@ -20,18 +20,18 @@ class Pi(Thread):
         self._lock_devices = Lock()
 
         self.server_sock = bt.BluetoothSocket(bt.RFCOMM)
-        self.server_sock.bind(("", bt.PORT_ANY))
+        self.server_sock.bind(('', bt.PORT_ANY))
         self.server_sock.listen(1)
         self.accept = True
         self.cont = 0
         port = self.server_sock.getsockname()[1]
 
-        bt.advertise_service(self.server_sock, "SampleServer",
+        bt.advertise_service(self.server_sock, 'SampleServer',
                              service_id=UUID,
                              service_classes=[UUID, bt.SERIAL_PORT_CLASS],
                              profiles=[bt.SERIAL_PORT_PROFILE])
 
-        print("Waiting for connection on RFCOMM channel %d" % port)
+        print('Waiting for connection on RFCOMM channel %d' % port)
 
     @property
     def devices(self):
@@ -42,16 +42,16 @@ class Pi(Thread):
 
     def run(self):
         while self.accept:
-            print("Esperando clientes")
+            print('Esperando clientes')
             client_sock, client_info = self.server_sock.accept()
             r = Receiver(self, client_sock, client_info)
             r.daemon = True
             r.start()
             self.cont += 1
-            print("clientes conectados " + str(self.cont))
+            print('clientes conectados ' + str(self.cont))
 
         self.server_sock.close()
-        print("server done")
+        print('server done')
 
     def stop(self):
         self.accept = False

@@ -9,20 +9,20 @@ class Receiver(Thread):
         self.client_info = client_info
 
     def run(self):
-        print("accepted connection from ", self.client_info)
+        print('accepted connection from ', self.client_info)
 
         try:
             while True:
                 data = self.client_sock.recv(1024)
                 if len(data) == 0:
                     break
-                print("received: %s" % data)
+                print('received: %s' % data)
                 self.pi.update_device(self.client_info[0], data)
         except IOError:
             pass
 
-        print("transmission ended")
+        print('transmission ended')
 
         self.client_sock.close()
 
-        print("client done")
+        print('client done')
