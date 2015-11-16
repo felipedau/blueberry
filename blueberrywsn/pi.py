@@ -19,19 +19,18 @@ class Pi(Thread):
         self._devices = {}
         self._lock_devices = Lock()
 
-        self.server_sock=BluetoothSocket( RFCOMM )
-        self.server_sock.bind(("",PORT_ANY))
+        self.server_sock = BluetoothSocket(RFCOMM)
+        self.server_sock.bind(("", PORT_ANY))
         self.server_sock.listen(1)
         self.accept = True
         self.cont = 0
         port = self.server_sock.getsockname()[1]
 
-        advertise_service( self.server_sock, "SampleServer",
-                           service_id = UUID,
-                           service_classes = [ UUID, SERIAL_PORT_CLASS ],
-                           profiles = [ SERIAL_PORT_PROFILE ],
-        #                   protocols = [ OBEX_UUID ]
-                            )
+        advertise_service(self.server_sock, "SampleServer",
+                          service_id=UUID,
+                          service_classes=[UUID, SERIAL_PORT_CLASS],
+                          profiles=[SERIAL_PORT_PROFILE])
+
         print("Waiting for connection on RFCOMM channel %d" % port)
 
     @property
@@ -48,8 +47,8 @@ class Pi(Thread):
             r = Receiver(self, client_sock, client_info)
             r.daemon = True
             r.start()
-            self.cont+=1
-            print("clientes conectados "+str(self.cont))
+            self.cont += 1
+            print("clientes conectados " + str(self.cont))
 
         server_sock.close()
         print("server done")
