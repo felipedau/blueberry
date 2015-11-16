@@ -1,5 +1,6 @@
-import bluetooth as bt
 from threading import Event, Thread
+
+import bluetooth as bt
 
 from constants import UUID
 from sensor import Sensor

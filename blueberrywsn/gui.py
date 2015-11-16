@@ -1,7 +1,6 @@
 import Tkinter as Tk
 import operator
 
-
 from pi import Pi
 
 
