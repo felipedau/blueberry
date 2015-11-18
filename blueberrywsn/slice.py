@@ -41,18 +41,18 @@ class Slice(Thread):
         name = first_match['name']
         host = first_match['host']
 
-        print('Connecting to \'%s\' on %s' % (name, host))
+        print('Attempting to connect to \'%s\' on %s' % (name, host))
 
         # Create the client socket
         sock = bt.BluetoothSocket(bt.RFCOMM)
         sock.connect((host, port))
-        print('Connected')
+        print('The connection has been accepted by the server')
 
         sock.send(str(info))
-        print('Info sent')
+        print('The information has been sent')
 
         sock.close()
-        print('Conection closed')
+        print('The client socket has been closed')
 
     def stop(self):
         self.done.set()

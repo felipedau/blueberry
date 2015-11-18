@@ -51,7 +51,7 @@ class Pi(Thread):
             print('Number of clients connected: %d' % str(self.cont))
 
         self.server_sock.close()
-        print('server done')
+        print('The server socket has been closed')
 
     def stop(self):
         self.accept = False
