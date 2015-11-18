@@ -42,13 +42,13 @@ class Pi(Thread):
 
     def run(self):
         while self.accept:
-            print('Esperando clientes')
+            print('Waiting for clients')
             client_sock, client_info = self.server_sock.accept()
             r = Receiver(self, client_sock, client_info)
             r.daemon = True
             r.start()
             self.cont += 1
-            print('clientes conectados ' + str(self.cont))
+            print('Number of clients connected: %d' % str(self.cont))
 
         self.server_sock.close()
         print('server done')

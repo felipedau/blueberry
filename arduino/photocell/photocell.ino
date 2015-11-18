@@ -1,43 +1,41 @@
-// pino analogico em que o sensor esta conectado
+// assign the light sensor to an analog pin
 int sensor = 0;
 
-// pinos digitais indicadores de nivel
-int ledVermelho = 8;
-int ledAmarelo = 10;
-int ledVerde = 12;
+// assign the LEDs that display the light level to digital pins
+int ledLow = 8;
+int ledMedium = 10;
+int ledHigh = 12;
 
-int luminosidade = 0;
+int level = 0;
 
-int intervalo = 5000;
+// set an interval for the sensor read
+int interval = 5000;
 
-// metodo setup, executado uma vez ao ligar o arduino
 void setup() {
-	//ativando o serial monitor
+	// activate the serial monitor to send the light level
 	Serial.begin(9600);
 }
 
-// metodo loop, executado enquanto o arduino estiver ligado
 void loop() {
-	luminosidade = analogRead(sensor);
+	level = analogRead(sensor);
 
-	apagaLeds();
-	if (luminosidade < 300) {
-		// luminosidade baixa
-		digitalWrite(ledVermelho, HIGH);
-	} else if (luminosidade < 600) {
-		// luminosidade media
-		digitalWrite(ledAmarelo, HIGH);
+	dimLeds();
+	if (level < 300) {
+		digitalWrite(ledLow, HIGH);
+	} else if (level < 600) {
+		digitalWrite(ledMedium, HIGH);
 	} else {
-		// luminosidade alta
-		digitalWrite(ledVerde, HIGH);
+		digitalWrite(ledHigh, HIGH);
 	}
 
-	Serial.println(luminosidade);
-	delay(intervalo);
+	// send the light level
+	Serial.println(level);
+
+	delay(interval);
 }
 
-void apagaLeds() {
-	digitalWrite(ledVermelho, LOW);
-	digitalWrite(ledAmarelo, LOW);
-	digitalWrite(ledVerde, LOW);
+void dimLeds() {
+	digitalWrite(ledLow, LOW);
+	digitalWrite(ledMedium, LOW);
+	digitalWrite(ledHigh, LOW);
 }

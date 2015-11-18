@@ -8,7 +8,7 @@ class ServerGui(Tk.Tk, object):
     def __init__(self):
         super(ServerGui, self).__init__()
 
-        self.title('Sistemas Distribuidos - 802.15.1')
+        self.title('Distributed Systems - 802.15.1')
 
         frame_main = Tk.Frame(self)
         frame_main.grid(sticky='nswe', padx=15, pady=15)
@@ -33,7 +33,7 @@ class ServerGui(Tk.Tk, object):
             for device, level in counter:
                 self.list.insert(Tk.END, device + ' ' + str(level))
         else:
-            self.list.insert(Tk.END, 'Nenhum dispositivo ativo')
+            self.list.insert(Tk.END, 'There are no active devices')
 
     def keep_updating(self):
         self.update_list()
