@@ -22,7 +22,7 @@ class Pi(Thread):
         self.server_sock = bt.BluetoothSocket(bt.RFCOMM)
         self.server_sock.bind(('', bt.PORT_ANY))
         self.server_sock.listen(1)
-        self.accept = True
+        self.done = None
         port = self.server_sock.getsockname()[1]
 
         bt.advertise_service(self.server_sock, 'SampleServer',
@@ -40,7 +40,8 @@ class Pi(Thread):
         return devs
 
     def run(self):
-        while self.accept:
+        self.done = Event()
+        while not self.done.isSet():
             print('Waiting for clients')
             client_sock, client_info = self.server_sock.accept()
             r = Receiver(self, client_sock, client_info)
@@ -51,7 +52,7 @@ class Pi(Thread):
         print('The server socket has been closed')
 
     def stop(self):
-        self.accept = False
+        self.done.set()
 
     def update_device(self, device, data):
         self._lock_devices.acquire()
