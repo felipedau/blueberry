@@ -21,5 +21,7 @@ class Receiver(Thread):
         except IOError:
             pass
 
+        print('Number of clients on the network: %d' % str(len(self.pi.devices)))
+
         self.client_sock.close()
         print('The client socket has been closed')

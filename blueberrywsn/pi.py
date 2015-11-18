@@ -23,7 +23,6 @@ class Pi(Thread):
         self.server_sock.bind(('', bt.PORT_ANY))
         self.server_sock.listen(1)
         self.accept = True
-        self.cont = 0
         port = self.server_sock.getsockname()[1]
 
         bt.advertise_service(self.server_sock, 'SampleServer',
@@ -47,8 +46,6 @@ class Pi(Thread):
             r = Receiver(self, client_sock, client_info)
             r.daemon = True
             r.start()
-            self.cont += 1
-            print('Number of clients connected: %d' % str(self.cont))
 
         self.server_sock.close()
         print('The server socket has been closed')
