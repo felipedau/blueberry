@@ -55,7 +55,12 @@ class Slice(Thread):
         print('The client socket has been closed')
 
     def stop(self):
-        self.done.set()
+        try:
+            self.done.set()
+        except AttributeError:
+            print('The client cannot be stopped. It is not running')
+        else:
+            print('The client has been stopped')
 
 
 def main():

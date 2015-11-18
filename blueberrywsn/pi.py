@@ -52,7 +52,12 @@ class Pi(Thread):
         print('The server socket has been closed')
 
     def stop(self):
-        self.done.set()
+        try:
+            self.done.set()
+        except AttributeError:
+            print('The server cannot be stopped. It is not running')
+        else:
+            print('The server has been stopped')
 
     def update_device(self, device, data):
         self._lock_devices.acquire()
