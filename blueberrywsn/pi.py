@@ -4,7 +4,7 @@
 #
 # $Id: rfcomm-server.py 518 2007-08-10 07:20:07Z albert $
 from copy import deepcopy
-from threading import Lock, Thread
+from threading import Event, Lock, Thread
 
 import bluetooth as bt
 
