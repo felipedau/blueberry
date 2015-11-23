@@ -11,7 +11,7 @@ class Sensor:
         try:
             self.serial = Serial(port, rate)
         except OSError:
-            print('The sensor reader cannot be found at %d' % port)
+            print('The sensor reader cannot be found at %s' % port)
 
     def read(self):
         try:
