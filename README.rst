@@ -6,6 +6,12 @@ Technological University of Paraná. It can be used to create a server
 and clients to establish a Bluetooth network that monitors the light
 sensors of each client.
 
+Implementation
+--------------
+The implementation of the server and client of blueberrywsn is based
+on the RFCOMM `examples`_ of the Bluetooth Python extension module
+`PyBluez`_, which is also a dependency of this application.
+
 Installation
 ------------
 blueberrywsn can be installed with `pip`_::
@@ -48,8 +54,10 @@ The authors who developed this application are:
 - `gabrielrubinobr`_
 - `GuDiasOliveira`_
 
+.. _`examples`: https://github.com/karulis/pybluez/tree/master/examples/simple
 .. _`GuDiasOliveira`: https://github.com/GuDiasOliveira
 .. _`felipedau`: https://github.com/felipedau
 .. _`feruffo`: https://github.com/feruffo
 .. _`gabrielrubinobr`: https://github.com/gabrielrubinobr
 .. _`pip`: https://pypi.python.org/pypi/pip
+.. _`pybluez`: https://github.com/karulis/pybluez
