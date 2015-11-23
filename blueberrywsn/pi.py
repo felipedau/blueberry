@@ -69,7 +69,7 @@ def main():
     p = Pi()
     p.start()
     try:
-        raw_input('Press any key to stop the server\n')
+        raw_input('Press "enter" or "ctrl + c" to stop the server\n')
     except KeyboardInterrupt:
         pass
     finally:

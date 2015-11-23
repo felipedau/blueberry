@@ -67,7 +67,7 @@ def main():
     s = Slice()
     s.start()
     try:
-        raw_input('Press any key to stop the client\n')
+        raw_input('Press "enter" or "ctrl + c" to stop the client\n')
     except KeyboardInterrupt:
         print()
     finally:
