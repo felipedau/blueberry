@@ -71,7 +71,7 @@ def main():
     try:
         raw_input('Press "enter" or "ctrl + c" to stop the server\n')
     except KeyboardInterrupt:
-        pass
+        print()
     finally:
         p.stop()
 
