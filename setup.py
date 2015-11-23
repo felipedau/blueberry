@@ -22,5 +22,11 @@ setup(
     install_requires=[
         'pybluez>=0.22',
         'pyserial>=2.7',
-    ]
+    ],
+    entry_points={
+        'console_scripts': [
+            'blueberrywsn=blueberrywsn:main',
+        ],
+    },
+
 )
