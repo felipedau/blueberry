@@ -14,7 +14,11 @@ on the RFCOMM `examples`_ of the Bluetooth Python extension module
 
 Installation
 ------------
-blueberrywsn can be installed with `pip`_::
+First, make sure to install *PyBluez's* dependencies::
+
+    sudo apt-get install python-dev libbluetooth-dev
+
+Finally, blueberrywsn can be installed with `pip`_::
 
     sudo pip install blueberrywsn
 
