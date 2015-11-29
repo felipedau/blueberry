@@ -24,4 +24,7 @@ var/
 .installed.cfg
 *.egg
 
+# Sphinx documentation
+docs/build
+
 .idea/
