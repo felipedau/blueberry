@@ -4,16 +4,16 @@ As seções à seguir explicarão como executar um servidor e clientes
 para formarem uma rede sem fio *Bluetooth* de sensores de
 luminosidade.
 
-blueberry (*Raspberry Pi*)
---------------------------
-Tendo o pacote **blueberry-network** instalado, basta executar os
-comandos descritos a seguir.
+blueberrywsn (*Raspberry Pi*)
+-----------------------------
+Tendo o pacote **blueberrywsn** instalado, basta executar os comandos
+descritos a seguir.
 
 Servidor
 ''''''''
 O servidor deve ser executado pelo seguinte comando::
 
-    blueberry-network --server
+    blueberrywsn server
 
 O servidor passará a aguardar por conexões realizadas pelos
 clientes que informarão os níveis de luminosidade de seus respectivos
@@ -24,10 +24,12 @@ Cliente
 '''''''
 O cliente deve ser executado pelo seguinte comando::
 
-    blueberry-network --client
+    blueberrywsn client
 
 Com o servidor em execução, o *Raspberry Pi* passará a enviar o nível
 de luminosidade lido pelo *UNO* periodicamente.
+
+Pressione ``enter`` ou ``ctrl + c`` para parar.
 
 TrabalhoFaculSDAppAndroidBT (*Android*)
 ---------------------------------------
